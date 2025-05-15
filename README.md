@@ -9,7 +9,8 @@ MENTOR: NEELA SANTOSH
 
 
 #DESCRIPTION OF MY TASK
-         Synchronous RAM is an essential memory element in digital systems that ensures all memory operations—both reading and writing—occur in synchronization with a clock signal. This timing coordination is crucial in modern digital designs to guarantee predictable and reliable data access without timing glitches or race conditions that are common in asynchronous memory designs. The synchronous RAM modules provided here, implemented in both Verilog and VHDL, model this behavior in a straightforward and flexible way, making them suitable for a wide range of applications such as buffering, caching, or simple data storage in FPGA and ASIC designs.
+          
+          Synchronous RAM is an essential memory element in digital systems that ensures all memory operations—both reading and writing—occur in synchronization with a clock signal. This timing coordination is crucial in modern digital designs to guarantee predictable and reliable data access without timing glitches or race conditions that are common in asynchronous memory designs. The synchronous RAM modules provided here, implemented in both Verilog and VHDL, model this behavior in a straightforward and flexible way, making them suitable for a wide range of applications such as buffering, caching, or simple data storage in FPGA and ASIC designs.
 
          At the core of these modules is a memory array that stores data words. The size of each data word (data width) and the number of addressable memory locations (address width) are parameterized, allowing the designer to customize the memory size according to system requirements. This parameterization enables these modules to be versatile and reusable components across different projects.
 

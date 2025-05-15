@@ -24,3 +24,7 @@ MENTOR: NEELA SANTOSH
             Together, these modules provide a solid foundation for implementing synchronous RAM in hardware designs. Their parameterized nature, clear synchronous behavior, and simple interfaces make them ideal for teaching, prototyping, and real-world applications. Designers can easily extend them by adding features such as reset signals, asynchronous reads, or byte enable controls depending on system complexity. These modules also simplify timing analysis and integration with other synchronous logic components, which is vital for high-speed and complex digital circuits.
 
              In summary, synchronous RAM modules implemented in Verilog and VHDL encapsulate the fundamental principles of clock-driven memory design, balancing flexibility, reliability, and ease of use. They demonstrate how memory can be efficiently managed within synchronous digital systems, ensuring data integrity and timing predictability essential for modern electronics.
+
+
+![Image](https://github.com/user-attachments/assets/c0a9b6ab-6333-4988-88ab-ec6e12e8b865)
+![Image](https://github.com/user-attachments/assets/b5cd543b-4818-4f04-908c-128eecfa70ad)

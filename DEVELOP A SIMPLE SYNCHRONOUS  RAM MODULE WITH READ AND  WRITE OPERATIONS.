@@ -1,0 +1,112 @@
+#CODE
+// Code your design here
+`timescale 1ns / 1ps
+
+module simple_sync_ram #(
+    parameter DATA_WIDTH = 8,
+    parameter ADDR_WIDTH = 4
+)(
+    input wire clk,
+    input wire we,                    // Write enable
+    input wire [ADDR_WIDTH-1:0] addr,
+    input wire [DATA_WIDTH-1:0] din, // Data input
+    output reg [DATA_WIDTH-1:0] dout // Data output
+);
+
+    // Memory array
+    reg [DATA_WIDTH-1:0] mem_array [0:(1 << ADDR_WIDTH)-1];
+
+    always @(posedge clk) begin
+        if (we) begin
+            mem_array[addr] <= din;  // Write operation
+        end
+        dout <= mem_array[addr];     // Synchronous read
+    end
+
+endmodule 
+
+
+
+#TESTBENCH
+// Code your testbench here
+// or browse Examples
+`timescale 1ns / 1ps
+
+module tb_simple_sync_ram;
+
+    parameter DATA_WIDTH = 8;
+    parameter ADDR_WIDTH = 4;
+
+    reg clk;
+    reg we;
+    reg [ADDR_WIDTH-1:0] addr;
+    reg [DATA_WIDTH-1:0] din;
+    wire [DATA_WIDTH-1:0] dout;
+
+    // Instantiate RAM module
+    simple_sync_ram #(DATA_WIDTH, ADDR_WIDTH) uut (
+        .clk(clk),
+        .we(we),
+        .addr(addr),
+        .din(din),
+        .dout(dout)
+    );
+
+    // Clock generation (10 ns period)
+    initial clk = 0;
+    always #5 clk = ~clk;
+
+    // VCD dump for waveform viewing
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_simple_sync_ram);
+    end
+
+    initial begin
+        // Initialize inputs
+        we = 0;
+        addr = 0;
+        din = 0;
+
+        // Wait 20 ns before starting
+        #20;
+
+        // Write 0xAA to address 1
+        we = 1; addr = 4'b0001; din = 8'hAA;
+        #10; // Wait one clock cycle
+
+        // Write 0x55 to address 2
+        addr = 4'b0010; din = 8'h55;
+        #10;
+
+        // Write 0xFF to address 3
+        addr = 4'b0011; din = 8'hFF;
+        #10;
+
+        // Disable write to read data
+        we = 0;
+
+        // Read from address 1
+        addr = 4'b0001;
+        #10;
+        $display("Time=%0t, Read from addr 1 = 0x%0h", $time, dout);
+
+        // Read from address 2
+        addr = 4'b0010;
+        #10;
+        $display("Time=%0t, Read from addr 2 = 0x%0h", $time, dout);
+
+        // Read from address 3
+        addr = 4'b0011;
+        #10;
+        $display("Time=%0t, Read from addr 3 = 0x%0h", $time, dout);
+
+        // Read from address 0 (should be 0)
+        addr = 4'b0000;
+        #10;
+        $display("Time=%0t, Read from addr 0 = 0x%0h", $time, dout);
+
+        $finish;
+    end
+
+endmodule
